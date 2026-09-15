@@ -28,3 +28,13 @@ selectivity_score = maxTanimoto(TierA) - maxTanimoto(CB1-actives); hit requires
 selectivity_score >= 0.25 AND S_cb2 >= 0.40. Full ranking run is gated behind
 --i-have-reviewed-the-prereg: no ranking until Jake approves preregistration/CNR2.md.
 Docking spike: 5ZTY / 6KPC / 6PT0 all verified as CB2 structures (Phase 2b, not built).
+
+## 2026-09-15 — Pre-registration approved, full screen authorized
+
+Jake reviewed preregistration/CNR2.md. Q1: honest-zero outcome acceptable,
+publishable as negative result; thresholds stand. Q2/Q3 delegated to agent
+judgment: (a) accept agonist/antagonist blindness in the ligand screen, resolve
+via Phase 2b docking on hits; (b) Tier A pure for primary metric, Tier B as
+secondary annotation. Full 4,225-drug ranking authorized; runs in the agent VM
+(CPU-cheap). Local PC env (conda blocked by Codex policy) deferred — only
+needed for Phase 2b docking.
