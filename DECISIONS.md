@@ -55,3 +55,13 @@ Disposition decided: write up the CNR2 negative result as a preprint.
 Jake's framing: the purpose is not publicity, it is to do the work well so the
 same machine can be re-run for other targets. The preprint + repo become the
 reusable template. Next target candidate: MCHR1 (cleanest data in the scout).
+
+## 2026-09-15 — Manuscript approved; independent QA commissioned
+
+Jacob approved the CNR2 preprint draft ("good as is"). Manuscript committed to
+manuscript/CNR2-preprint.md. bioRxiv posting is Jacob's action (needs his
+account). A fresh, previously-uninvolved subagent is now doing an independent
+QA pass: full pipeline reproduction from the repo, number verification against
+the manuscript, pre-reg freeze-timing check via git history, adversarial
+methods review, reference checks. It reports flaws; it does not fix. Next
+targets (MCHR1 etc.) wait on a clear QA.
