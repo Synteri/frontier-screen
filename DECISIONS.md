@@ -48,3 +48,10 @@ inorganics). Bicalutamide cleared the similarity floor but failed selectivity â€
 the failure mode the screen was built to catch. Run summary: RUN_SUMMARY.md.
 Disposition (publish negative result vs pivot) is Jake's call per the
 pre-registered kill criteria.
+
+## 2026-09-15 â€” Jake: publish the honest zero
+
+Disposition decided: write up the CNR2 negative result as a preprint.
+Jake's framing: the purpose is not publicity, it is to do the work well so the
+same machine can be re-run for other targets. The preprint + repo become the
+reusable template. Next target candidate: MCHR1 (cleanest data in the scout).
