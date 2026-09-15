@@ -107,3 +107,26 @@ Viable: three CB2 structures verified in the PDB 2026-09-15 —
 agonist- vs antagonist-bound pockets would test functional-direction
 blindness (red-team objection 1). Build only if the ligand-based screen
 produces hits worth the compute.
+
+## Review decisions — 2026-09-15 (Jake)
+
+The pre-registration above was reviewed before any ranking run. Decisions:
+
+1. **Threshold strictness:** an honest-zero outcome is acceptable and publishable
+   as a negative result. The 0.25 / 0.40 bar stands; it will not be lowered
+   after seeing results to manufacture hits.
+2. **Agonist/antagonist blindness:** ACCEPTED for the ligand screen, by agent
+   judgment (Jake delegated). Rationale: annotating ~1,400 Tier A ligands for
+   functional direction from ChEMBL assay text is noisy — many records are
+   binding-only with no functional readout, and assay descriptions do not
+   reliably encode direction. The screen's job is a shortlist; functional
+   direction gets adjudicated in Phase 2b docking (agonist-bound 6KPC/6PT0 vs
+   antagonist-bound 5ZTY) on surviving hits only. Recorded as a limitation.
+3. **Tier B inclusion:** Tier A stays PURE for the primary metric, by agent
+   judgment (Jake delegated). Rationale: selectivity over CB1 is the
+   load-bearing claim of this screen; folding in 1,014 ligands of unknown CB1
+   activity dilutes exactly what makes the result worth trusting. Tier B
+   similarity is reported as a secondary annotation column on hits (supporting
+   breadth, not primary evidence).
+
+Full ranking run authorized as of this review.
