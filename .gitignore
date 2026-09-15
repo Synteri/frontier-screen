@@ -1,0 +1,8 @@
+# Raw and cleaned data are pulled/cached locally, not committed.
+# Reproduce with: python scripts/01_pull_data.py && python scripts/02_clean_data.py
+data/raw/
+data/clean/
+__pycache__/
+*.pyc
+# Local test outputs; the reviewed full-run results/ ARE committed.
+results/screen_test.csv
