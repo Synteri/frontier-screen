@@ -38,3 +38,13 @@ via Phase 2b docking on hits; (b) Tier A pure for primary metric, Tier B as
 secondary annotation. Full 4,225-drug ranking authorized; runs in the agent VM
 (CPU-cheap). Local PC env (conda blocked by Codex policy) deferred — only
 needed for Phase 2b docking.
+
+## 2026-09-15 — Full CNR2 screen complete: 0 hits (honest zero)
+
+3,417 approved drugs scored, 0 hits against the pre-registered bar
+(selectivity >= 0.25 and S_cb2 >= 0.40). Clean zero: top score 0.139, no
+near-misses at the threshold. 808 drugs excluded as out-of-scope (biologics,
+inorganics). Bicalutamide cleared the similarity floor but failed selectivity —
+the failure mode the screen was built to catch. Run summary: RUN_SUMMARY.md.
+Disposition (publish negative result vs pivot) is Jake's call per the
+pre-registered kill criteria.
