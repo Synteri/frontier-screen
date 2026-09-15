@@ -1,0 +1,28 @@
+{
+  "generated_utc": "2026-09-15T21:42:06.174914+00:00",
+  "sources": {
+    "CNR2": {
+      "target_chembl_id": "CHEMBL253",
+      "filter": "target_chembl_id=CHEMBL253",
+      "record_count": 22523,
+      "endpoint": "https://www.ebi.ac.uk/chembl/api/data/activity.json"
+    },
+    "CB1": {
+      "target_chembl_id": "CHEMBL218",
+      "filter": "target_chembl_id=CHEMBL218",
+      "record_count": 25853,
+      "endpoint": "https://www.ebi.ac.uk/chembl/api/data/activity.json"
+    },
+    "approved_drugs": {
+      "filter": "max_phase=4",
+      "record_count": 4225,
+      "endpoint": "https://www.ebi.ac.uk/chembl/api/data/molecule.json",
+      "note": "slimmed to chembl_id / pref_name / canonical_smiles / max_phase / first_approval / molecule_type"
+    }
+  },
+  "files": {
+    "cnr2_activities.json": "c41c02dba8c5de33858e4c85915432d9fec23bbfc3628cb7a5069a39a71db748",
+    "cb1_activities.json": "cad2191cef64f2653069a818f714cd2fe745764b602101c502e547766e2c594b",
+    "approved_drugs.json": "bcf65fe8f5fd53b2bcbda02e2d31f318c5607d4003918d431367883d88a8b2c6"
+  }
+}
