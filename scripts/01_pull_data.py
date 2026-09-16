@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
-"""01_pull_data.py — pull ChEMBL bioactivity for CNR2/CB1 + approved-drug library.
+"""01_pull_data.py — pull ChEMBL bioactivity for the configured target/counter-target
++ approved-drug library.
 
 Usage:
-    python scripts/01_pull_data.py [--refresh]
+    python scripts/01_pull_data.py [--target CNR2] [--refresh]
+
+Target settings (ChEMBL IDs etc.) come from targets/<TARGET>.json.
+Default --target CNR2 reproduces the original committed pull.
 
 Re-runnable: cached JSON in data/raw/ is reused unless --refresh is passed.
 Writes data/manifest.json with source URLs, counts, timestamps, sha256.
@@ -23,12 +27,13 @@ import requests
 
 BASE = "https://www.ebi.ac.uk/chembl/api/data"
 RAW = os.path.join("data", "raw")
-MANIFEST = os.path.join("data", "manifest.json")
 
-TARGETS = {
-    "CNR2": "CHEMBL253",   # cannabinoid CB2 receptor (target of the screen)
-    "CB1": "CHEMBL218",    # cannabinoid CB1 receptor (counter-target: selectivity)
-}
+
+def load_target_config(name):
+    """Target settings live in targets/<TARGET>.json (stdlib json, no yaml dep)."""
+    path = os.path.join("targets", f"{name}.json")
+    with open(path) as f:
+        return json.load(f)
 
 PAGE = 1000
 SLEEP = 0.2  # politeness delay between paged requests
@@ -37,13 +42,29 @@ LIST_KEYS = {"activity": "activities", "molecule": "molecules"}
 
 
 def fetch_paged(endpoint, params):
-    """Fetch all pages of a ChEMBL list endpoint. Returns (items, total_count)."""
+    """Fetch all pages of a ChEMBL list endpoint. Returns (items, total_count).
+
+    Retries transient failures (proxy drops on long pulls) with backoff —
+    a 40k-record pull makes a few dropped connections likely.
+    """
     list_key = LIST_KEYS[endpoint]
     items, offset, total = [], 0, None
     while True:
         q = dict(params, limit=PAGE, offset=offset)
-        r = requests.get(f"{BASE}/{endpoint}.json", params=q, timeout=60)
-        r.raise_for_status()
+        for attempt in range(4):
+            try:
+                r = requests.get(f"{BASE}/{endpoint}.json", params=q,
+                                 timeout=60)
+                r.raise_for_status()
+                break
+            except requests.RequestException as e:
+                wait = 2 ** attempt
+                print(f"\n  [retry {attempt + 1}/4] {type(e).__name__} "
+                      f"at offset {offset}; sleeping {wait}s")
+                time.sleep(wait)
+        else:
+            raise RuntimeError(f"failed to fetch {endpoint} at offset "
+                               f"{offset} after 4 attempts")
         payload = r.json()
         if total is None:
             total = payload["page_meta"]["total_count"]
@@ -110,18 +131,28 @@ def pull_approved_drugs(refresh):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--target", default="CNR2",
+                    help="target config in targets/<TARGET>.json")
     ap.add_argument("--refresh", action="store_true",
                     help="re-download even if cache exists")
     args = ap.parse_args()
 
+    cfg = load_target_config(args.target)
+    targets = {
+        cfg["target_key"]: cfg["target_chembl_id"],     # target of the screen
+        cfg["counter_key"]: cfg["counter_chembl_id"],   # counter-target
+    }
+    manifest_path = os.path.join("data", cfg["manifest_file"])
+
     os.makedirs(RAW, exist_ok=True)
     manifest = {
         "generated_utc": datetime.now(timezone.utc).isoformat(),
+        "target": args.target,
         "sources": {},
         "files": {},
     }
 
-    for name, cid in TARGETS.items():
+    for name, cid in targets.items():
         path, count, url = pull_target_activities(name, cid, args.refresh)
         manifest["sources"][name] = {
             "target_chembl_id": cid,
@@ -141,9 +172,9 @@ def main():
     }
     manifest["files"][os.path.basename(path)] = sha256_file(path)
 
-    with open(MANIFEST, "w") as f:
+    with open(manifest_path, "w") as f:
         json.dump(manifest, f, indent=2)
-    print(f"[ok] manifest -> {MANIFEST}")
+    print(f"[ok] manifest -> {manifest_path}")
     print(json.dumps(
         {k: v["record_count"] for k, v in manifest["sources"].items()},
         indent=2))

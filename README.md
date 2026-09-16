@@ -25,8 +25,18 @@ conda activate frontier-screen
 python scripts/00_smoke_test.py
 
 # 3. Full pipeline (after Phase 1 target selection)
-.\run.ps1
+.\run.ps1                 # default target: CNR2
+.\run.ps1 -Target MCHR1   # another configured target
 ```
+
+## Targets
+
+Each screen target is configured in `targets/<TARGET>.json` (ChEMBL IDs,
+thresholds, file names, score column labels) and pre-registered in
+`preregistration/<TARGET>.md`. The pipeline scripts take `--target`
+(default `CNR2`, which reproduces the original committed result exactly).
+`targets/CNR2.json` is frozen; new targets get their own config plus their
+own pre-registration, reviewed before the ranking gate opens.
 
 ## Layout
 

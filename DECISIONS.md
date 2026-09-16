@@ -65,3 +65,23 @@ QA pass: full pipeline reproduction from the repo, number verification against
 the manuscript, pre-reg freeze-timing check via git history, adversarial
 methods review, reference checks. It reports flaws; it does not fix. Next
 targets (MCHR1 etc.) wait on a clear QA.
+
+## 2026-09-15 — MCHR1 target started; pipeline parameterized
+
+Second mining attempt: MCHR1 (CHEMBL344) with hERG (CHEMBL240, KCNH2) as the
+counter-target — hERG cardiotoxicity was the documented killer of the MCHR1
+antagonist programs, so selectivity over hERG is this screen's entire point,
+mirroring the CNR2/CB1 structure. MCHR2 (sibling receptor) considered and
+rejected: 307 ChEMBL records, too thin for a pre-registered selectivity
+metric. Pipeline scripts now take --target with settings in targets/*.json;
+targets/CNR2.json is frozen and reproduces the committed CNR2 result exactly
+(verified: config equals original constants; loose inactivity rule identical
+on truth table). The CNR2 QA fix is now the machine default: a '>' record
+counts as counter-inactive only if its reported bound clears the bar
+(targets/MCHR1.json: loose_gt_inactivity=false). Pre-registration drafted at
+preregistration/MCHR1.md — DRAFT, awaiting human review; the ranking gate is
+closed until then. Pilot (100 drugs) passes end to end: Tier A = 71 hERG-clean
+MCHR1 ligands (kill threshold: 25), Tier B = 2,137, hERG-active set = 2,441.
+Pull counts: MCHR1 6,037 / hERG 41,078 / approved drugs 4,225. Added retry
+with backoff to the ChEMBL puller after a proxy drop killed the first hERG
+pull. Full ranking NOT run — gated on pre-reg review.
