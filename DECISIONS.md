@@ -85,3 +85,29 @@ MCHR1 ligands (kill threshold: 25), Tier B = 2,137, hERG-active set = 2,441.
 Pull counts: MCHR1 6,037 / hERG 41,078 / approved drugs 4,225. Added retry
 with backoff to the ChEMBL puller after a proxy drop killed the first hERG
 pull. Full ranking NOT run — gated on pre-reg review.
+## 2026-09-16 — QA remediation complete: M1 sensitivity analysis confirms the zero; manuscript fixed (1 major + 8 minor)
+
+Independent QA (2026-09-15) returned CLEAR with 1 major + 8 minor findings and
+reproduced the full pipeline exactly. All findings addressed:
+
+- **Major M1 (Tier A ">"-bound weakness):** the frozen primary result is
+  unchanged (1,412 / pre-registered rule intact). Added a documented post-hoc
+  sensitivity mode (`scripts/04_sensitivity_tierA_tightened.py`) where a CB1
+  ">" record counts only if its bound is itself <= 5.0 pChEMBL. Tightened Tier A
+  = 1,263 (149 dropped, bounds 5.25-8.82); re-run on the full 3,417-drug
+  library: 0 hits, max selectivity 0.1394, nothing near the 0.25 bar, no score
+  increased vs the frozen primary. Outputs under
+  `results/sensitivity_tierA_tightened/`. Manuscript carries the M1 disclosure
+  in Limitations and a Results paragraph on the sensitivity check. Tightened
+  rule adopted for future screens.
+- **Minor fixes:** review gate described accurately (CLI attestation flag
+  `--i-have-reviewed-the-prereg`, auditable via git chronology); 100-drug
+  pre-threshold pilot disclosed; refs corrected (Spiera vol/pages + DOI,
+  Haymer full 16-author list, Li scoped to the CB2 structure, new ref 6:
+  Topol et al. Lancet 2010 CRESCENDO for rimonabant); stale draft header
+  refreshed to author-approved preprint status; "re-pulls deterministically"
+  replaced with honest live-database language; internal open-questions section
+  removed from the preprint body (resolutions preserved in git history).
+- Fresh data pull re-verified determinism: CNR2 22,523 / CB1 25,853 /
+  approved 4,225 (one transient ChEMBL read timeout on CB1, succeeded on
+  retry). Commits follow; bioRxiv posting still requires Jacob's account.

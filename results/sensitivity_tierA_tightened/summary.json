@@ -1,0 +1,70 @@
+{
+  "tierA_tightened_n": 1263,
+  "tierA_dropped_n": 149,
+  "drugs_scored": 3417,
+  "hits": 0,
+  "max_selectivity_score": 0.1394,
+  "max_S_cb2": 0.5217,
+  "top10": [
+    {
+      "pref_name": "IOVERSOL",
+      "S_cb2": 0.3016,
+      "S_cb1": 0.1622,
+      "selectivity_score": 0.1394
+    },
+    {
+      "pref_name": "REVUMENIB",
+      "S_cb2": 0.3684,
+      "S_cb1": 0.2476,
+      "selectivity_score": 0.1208
+    },
+    {
+      "pref_name": "PIRACETAM",
+      "S_cb2": 0.3208,
+      "S_cb1": 0.2,
+      "selectivity_score": 0.1208
+    },
+    {
+      "pref_name": "IOHEXOL",
+      "S_cb2": 0.2857,
+      "S_cb1": 0.1692,
+      "selectivity_score": 0.1165
+    },
+    {
+      "pref_name": "IODIXANOL",
+      "S_cb2": 0.2857,
+      "S_cb1": 0.1692,
+      "selectivity_score": 0.1165
+    },
+    {
+      "pref_name": "BICALUTAMIDE",
+      "S_cb2": 0.4219,
+      "S_cb1": 0.3108,
+      "selectivity_score": 0.1111
+    },
+    {
+      "pref_name": "IOMEPROL",
+      "S_cb2": 0.2903,
+      "S_cb1": 0.1806,
+      "selectivity_score": 0.1098
+    },
+    {
+      "pref_name": "THIOGUANINE",
+      "S_cb2": 0.2632,
+      "S_cb1": 0.1538,
+      "selectivity_score": 0.1093
+    },
+    {
+      "pref_name": "GOSOGLIPTIN",
+      "S_cb2": 0.3288,
+      "S_cb1": 0.2366,
+      "selectivity_score": 0.0922
+    },
+    {
+      "pref_name": "METHOXSALEN",
+      "S_cb2": 0.2857,
+      "S_cb1": 0.197,
+      "selectivity_score": 0.0887
+    }
+  ]
+}
