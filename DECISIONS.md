@@ -111,3 +111,24 @@ reproduced the full pipeline exactly. All findings addressed:
 - Fresh data pull re-verified determinism: CNR2 22,523 / CB1 25,853 /
   approved 4,225 (one transient ChEMBL read timeout on CB1, succeeded on
   retry). Commits follow; bioRxiv posting still requires Jacob's account.
+
+## 2026-09-15 — MCHR1 screen: honest zero
+
+Pre-registration reviewed and recorded (`preregistration/MCHR1.md`): Q1
+answered by Jacob Schumacher directly (thresholds 0.25/0.40 frozen, honest
+zero acceptable, bar will not move); Q2–Q5 delegated to specialist review —
+hERG kept as sole counter-target (HIGH confidence; Högberg et al. BMCL 2012
+verbatim hERG-failure-mode claim, Lim et al. IJMS 2022, all five Phase I
+candidates discontinued), obesity/metabolic primary framing (HIGH;
+sleep/mood/NASH as secondary literature angles, mood signal contested per
+Basso 2006), antagonist blindness accepted with hit-only adjudication
+(HIGH on data facts, MEDIUM on the tradeoff), Tier B as secondary
+annotation (HIGH, CNR2-consistent). MCHR2 verified at 307 ChEMBL records —
+too thin for the metric, stays out.
+
+Full run (gated, post-review): 3,417 approved drugs scored, **0 hits**.
+Top selectivity score 0.1309 (vildagliptin), well clear of the 0.25 bar;
+no drug even cleared the 0.40 similarity floor. Tier A = 71 hERG-clean
+MCHR1 ligands (kill bar 25 — selectivity basis exists). Results:
+`results/mchr1_screen_hits.csv`, `results/mchr1_RUN_SUMMARY.md`.
+Phase 2b docking not triggered (no hits).
