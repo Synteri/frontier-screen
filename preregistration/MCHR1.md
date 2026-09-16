@@ -80,14 +80,82 @@ rest of the ranked list is published with the preprint regardless of outcome.
 
 Docking the hits against MCHR1 structures would test the antagonist-blindness limitation (red-team objection 1): antagonist-bound pockets select for the therapeutic direction. Candidate structures to be verified in the PDB at that time — none are pre-committed here. Build only if the ligand-based screen produces hits worth the compute.
 
-## Review decisions — PENDING
+## Review decisions — RECORDED 2026-09-15
 
-The pre-registration above has not yet been reviewed. The author must decide:
+Q1 was answered by Jacob Schumacher directly: **YES** — the 0.25 / 0.40 bar is
+frozen, an honest zero is acceptable and publishable, the bar will not move
+after results. Q2–Q5 were delegated by Jacob to specialist AI review on
+2026-09-15 ("I don't know" was a delegation, not an abstention): decide on the
+merits, validate accuracy, never claim more certainty than the evidence
+supports. Each decision below carries an explicit confidence grade.
 
-1. **Threshold carry-over:** the 0.25 / 0.40 bar is inherited from CNR2 for cross-target comparability, not tuned to MCHR1. Confirm an honest-zero outcome stays acceptable and publishable, and the bar will not be lowered after seeing results.
-2. **Counter-target choice:** hERG as the primary counter-target (field's failure mode) with MCHR2 noted but excluded from the metric. Confirm, or redirect.
-3. **Disease framing:** obesity/metabolic as the primary therapeutic rationale (sleep, mood, NASH as secondary literature angles only). Confirm, or redirect.
-4. **Antagonist blindness:** accepted for the ligand screen, adjudicated in Phase 2b on surviving hits only, recorded as a limitation. Confirm, or require functional annotation up front.
-5. **Tier B handling:** Tier A stays pure for the primary metric; Tier B similarity reported as secondary annotation only. Confirm.
+1. **Threshold carry-over (Q1 — Jacob):** CONFIRMED FROZEN.
+   selectivity_score >= 0.25 AND S_mchr1 >= 0.40, carried over from CNR2
+   unchanged for cross-target comparability, not tuned to MCHR1 data.
 
-Full ranking run authorized only after these are recorded above.
+2. **Counter-target (Q2 — specialist review):** DECISION — keep hERG
+   (CHEMBL240) as the primary and only counter-target; MCHR2 stays out of the
+   metric. Confidence: **HIGH**.
+   Evidence: Högberg, Frimurer & Sasmal, *Bioorg. Med. Chem. Lett.* 2012
+   (doi:10.1016/j.bmcl.2012.08.025, PMID 22954736) — verbatim: "cardiovascular
+   risk involving hERG-binding activity and drug induced QTc prolongation has
+   been a major hurdle for a significant number of MCHR1 research programs,"
+   and "the structural and physicochemical requirements for MCHR1 potency and
+   hERG inhibition usually correlate with each another." Lim et al., *Int. J.
+   Mol. Sci.* 2022 (KRX-104130; doi:10.3390/ijms23073807, PMID 35409167):
+   "Most drugs developed as MCHR1 antagonists have failed in clinical
+   development due to cardiotoxicity caused by hERG inhibition." Mihalic et
+   al., *BMCL* 2012 (doi:10.1016/j.bmcl.2012.04.006) frames reduced hERG
+   inhibition as the explicit medicinal-chemistry design objective. The five
+   Phase I candidates (GW856464, AMG-076, NGD-4715, ALB-127158, BMS-830216)
+   are all discontinued — with the honest nuance that not all died *for*
+   hERG specifically (GW856464: low bioavailability; ALB-127158: insufficient
+   CNS exposure; BMS-830216: no weight reduction in Phase I), so the hERG
+   claim is scoped to the field's programs generally, not per compound.
+   MCHR2 (CHEMBL5038) verified live at 307 ChEMBL activity records (~1/20th
+   of MCHR1's 6,037) — too thin for a pre-registered selectivity metric.
+   No other named single counter-target is documented in the field
+   literature (medium confidence on this negative — aminergic GPCRs are a
+   general chemotype concern per Högberg 2012, CYP2D6 was series-specific
+   per Hudson et al. 2006). The hERG counter-set depth (41,078 records) plus
+   known withdrawn blockers (terfenadine, astemizole) in the approved-drug
+   library gives the counter-similarity real teeth.
+
+3. **Disease framing (Q3 — specialist review):** DECISION — obesity/metabolic
+   primary; sleep, mood, NASH as secondary literature angles only.
+   Confidence: **HIGH** that all four angles exist in the literature.
+   Evidence: Borowsky et al., *Nature Med.* 2002 (doi:10.1038/nm741) —
+   MCHR1 antagonist with anorectic effects (the obesity rationale); Ahnaou et
+   al., *Eur. J. Pharmacol.* 2008 (doi:10.1016/j.ejphar.2007.10.017) —
+   antagonists decreased deep/REM sleep and prolonged sleep onset; Kawata et
+   al., *EJP* 2017 (doi:10.1016/j.ejphar.2016.12.018) — selective antagonist
+   ameliorated hepatic steatosis in diet-induced obese rodents; Lim et al.
+   2022 — NASH mouse-model protection for KRX-104130. Caveat recorded: the
+   mood signal is contested (Basso et al., *EJP* 2006,
+   doi:10.1016/j.ejphar.2006.04.043 reported lack of efficacy in
+   depression/anxiety models), so mood stays a "literature angle," never an
+   efficacy claim. Framing affects the manuscript, not the screen math.
+
+4. **Antagonist blindness (Q4 — specialist review):** DECISION — accept
+   blindness for the ligand screen; adjudicate functional direction on hits
+   only (chemotype comparison against known antagonist series at dossier
+   review; Phase 2b docking in antagonist-bound structures on survivors).
+   Confidence: **HIGH** on the data facts, **MEDIUM** on the tradeoff
+   judgment. Evidence from the repo's own cleaned data: the raw MCHR1 pull
+   is 3,469 IC50 + 1,879 Ki (binding) records vs ~100 direction-informative
+   records (EC50 83, Efficacy 8, Emax 6); 70% of Tier-A-eligible molecules
+   (1,686 of 2,403) are binding-only. Requiring functional annotation up
+   front would gut the similarity basis without buying reliable direction —
+   an IC50 from a functional assay does not reliably encode agonist vs
+   antagonist without assay-text adjudication, which is noisy at this scale.
+   The same delegation was accepted for CNR2.
+
+5. **Tier B (Q5 — specialist review):** DECISION — Tier A stays pure for the
+   primary metric; Tier B similarity reported as secondary annotation only.
+   Confidence: **HIGH** on consistency with the CNR2 precedent (identical
+   decision, identical rationale: the primary metric must rest on measured
+   counter-target inactivity); the design choice is carried over deliberately
+   for cross-target comparability.
+
+The `--i-have-reviewed-the-prereg` gate is satisfied by this recorded review.
+Full ranking run authorized 2026-09-15.
